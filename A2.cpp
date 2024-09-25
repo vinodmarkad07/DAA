@@ -1,33 +1,49 @@
-#include"iostream"
-
+#include <iostream>
 using namespace std;
 
-int main()
+int main() 
 {
-    int n;
-    cout << "Enter the size of array: ";
-    cin >> n;
+    int n,i,j,high,low;
 
-    int arr[n], count = 0;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
+    // Take input for the size of the array
+    cout<<"Enter the size of the array: ";
+    cin>>n;
+
+    int arr[n];
+    // Take input for the elements of the array
+    cout<<"Enter the elements of the array: ";
+    for (i=0;i<n;i++) 
+        {
+        cin>>arr[i];
     }
 
-    for (int i = 0; i < n ; i++)
-    {
-        for (int j = 0 ; j < n - 1 ; j++)
+    low=0, 
+        high=n-1;
+
+    // Move non-zero elements to the left side
+    while(low<=high) 
         {
-            if ( arr[j] == 0 )
-            {
-                swap(arr[j], arr[j+1]);
+        if (arr[low]==0) 
+                {
+            // If element is zero, move it to the end
+            for (j=low;j<high;j++) 
+                        {
+                arr[j] = arr[j+1];
             }
+            arr[high]=0;
+            high--;
+        } 
+                else 
+                {
+            low++;
         }
     }
 
-    for(int i = 0 ; i < n ; i++)
-    {
-        cout << arr[i] << " ";
+    // Output the array after moving zeros to the end
+    cout<<"Array after moving zeros to the end: ";
+    for(i=0;i<n;i++) 
+        {
+        cout<<arr[i]<< " ";
     }
 
     return 0;
