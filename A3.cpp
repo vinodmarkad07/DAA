@@ -1,47 +1,50 @@
-#include"iostream"
-#include"string"
-#include"vector"
-
+#include<iostream>
 using namespace std;
 
-int trailZeros(int n)
-{
-    int count = 0;
+int main() {
+    int a[10],n,low,high,mid,count,i,ch; //declaring required variables
 
-    while(n % 10 == 0 && n != 0)
-    {
-        n = n / 10;
-        count++;
-    }
-    return count;
-}
+    //l1 is label for goto statement
+    l1:cout<< "\nEnter the Size of the Array : ";
+    cin>>n;
 
-int main()
-{
-    int n;
-    cout << "Enter the value of n: ";
-    cin >> n;
-
-    int t_zero = 0;
-    int i = 1;
-
-    while( t_zero < n )
-    {
-        int fact = 1;
-        for (int j = 1 ; j <= i ; j++)
+    cout<<"\nEnter the Elements of the Array : ";
+    for(i=0;i<n;i++) 
         {
-            fact *= j;
-        }
-
-        t_zero = trailZeros(fact);
-
-        if (t_zero >= n)
-        {
-            cout << i <<endl;
-            break;
-        }
-        i++;
+        cin>>a[i];
     }
+
+    low=0;
+    high=n-1;
+    count=0;
+
+    //binary search to find the first 1 in the array
+    while(low<=high) 
+        {
+        mid=(low+high)/2;
+
+        if(a[mid]==0) 
+                {
+            //if mid is 0, there may be more 0s on the right
+            low=mid+1;
+        } 
+                else 
+                {
+            //if mid is 1, move to the left half
+            high=mid-1;
+        }
+    }
+
+    //after the loop, low will point to the first 1, so count of 0s is low itself
+    count=low;
+
+    cout<<"\nTotal number of zeros: " <<count<<endl;
+
+    cout<<"\nWant to Continue Again ? (1 for yes)  ";
+    cin>>ch;
+
+    if(ch==1)
+    goto l1; //backward jumping for again repeating the same process
 
     return 0;
 }
